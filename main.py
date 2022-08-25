@@ -53,9 +53,6 @@ if len(mensaje_numeros) % dimClave != 0:
 
 mensaje_matriz = mensaje_numeros.reshape(int(len(mensaje_numeros) / dimClave), dimClave)
 
-print(mensaje_numeros)
-print(mensaje_matriz)
-
 # Cifrar mensaje
 
 mensaje_cifrado = np.matmul(mensaje_matriz, clave)
@@ -63,4 +60,11 @@ mensaje_cifrado = np.matmul(mensaje_matriz, clave)
 # Imprimir mensaje cifrado y guardar en archivo txt
 
 print("Mensaje cifrado: ", mensaje_cifrado.reshape(-1))
-np.savetxt("mensaje_cifrado.txt", mensaje_cifrado.reshape(-1), fmt="%d")
+
+txt = ['''Mensaje: {mensaje} \n
+Matriz clave:
+{clave} \n
+Mensaje cifrado: 
+{mensaje_cifrado}'''.format(mensaje=mensaje, clave=clave, mensaje_cifrado=mensaje_cifrado.reshape(-1))]
+
+np.savetxt('resultados.txt', txt, fmt='%s')
