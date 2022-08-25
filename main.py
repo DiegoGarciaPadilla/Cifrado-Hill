@@ -114,8 +114,6 @@ def descifrar(mensaje, clave):
 
   # Inicializar matriz de mensaje
 
-  print(mensaje)
-
   mensaje_matriz = mensaje.reshape(int(len(mensaje) / dimClave), dimClave)
 
   # Descifrar mensaje
