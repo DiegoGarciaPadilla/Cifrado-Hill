@@ -1,0 +1,8 @@
+Mensaje cifrado: [53. 76. 15. 28.] 
+
+  Matriz clave:
+  [[1. 2.]
+ [3. 4.]] 
+
+  Mensaje descifrado: 
+  HOLA
