@@ -6,65 +6,134 @@ import numpy as np
 
 abecedario = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z", " "]
 
-# Leer mensaje
+# Funciones
 
-mensaje = input("Ingrese el mensaje a cifrar: ")
+# Funcion de cifrado
 
-# Convertir mensaje a mayúsculas
+def cifrar(mensaje, clave):
 
-mensaje = mensaje.upper()
+  # Leer mensaje
 
-# Convertir mensaje a lista de numeros
+  mensaje = input("Ingrese el mensaje a cifrar: ")
 
-mensaje_numeros = np.array([])
+  # Convertir mensaje a mayúsculas
 
-for letra in range(len(mensaje)):
-  if ord(mensaje[letra]) == 32:
-    mensaje_numeros = np.append(mensaje_numeros, 27)
-  else:
-    mensaje_numeros = np.append(mensaje_numeros, (ord(mensaje[letra]) - 64))
+  mensaje = mensaje.upper()
 
-# Inicializar matriz de clave
+  # Convertir mensaje a lista de numeros
 
-dimClave = int(input("Ingrese la dimensión de la clave: "))
-clave = np.zeros((dimClave, dimClave))
+  mensaje_numeros = np.array([])
 
-# Ingresar valores de la matriz de clave
+  for letra in range(len(mensaje)):
+    if ord(mensaje[letra]) == 32:
+      mensaje_numeros = np.append(mensaje_numeros, 27)
+    else:
+      mensaje_numeros = np.append(mensaje_numeros, (ord(mensaje[letra]) - 64))
 
-for i in range(dimClave):
-    for j in range(dimClave):
-        clave[i][j] = int(input("Ingrese el valor de la posición " + str(i) + "," + str(j) + ": "))
+  # Inicializar matriz de clave
 
-# Validar si la matriz clave es invertible
+  dimClave = int(input("Ingrese la dimensión de la clave: "))
+  clave = np.zeros((dimClave, dimClave))
 
-while np.linalg.det(clave) == 0:
-    print("La matriz clave no es invertible")
-    clave = np.zeros((dimClave, dimClave))
-    for i in range(dimClave):
-        for j in range(dimClave):
-            clave[i][j] = int(input("Ingrese el valor de la posición " + str(i) + "," + str(j) + ": "))
+  # Ingresar valores de la matriz de clave
 
-# Initializar matriz de mensaje
+  for i in range(dimClave):
+      for j in range(dimClave):
+          clave[i][j] = int(input("Ingrese el valor de la posición " + str(i) + "," + str(j) + ": "))
 
-if len(mensaje_numeros) % dimClave != 0:
-    espacios = dimClave - (len(mensaje_numeros) % dimClave)
-    for i in range(espacios):
-        mensaje_numeros = np.append(mensaje_numeros, 27)
+  # Validar si la matriz clave es invertible
 
-mensaje_matriz = mensaje_numeros.reshape(int(len(mensaje_numeros) / dimClave), dimClave)
+  while np.linalg.det(clave) == 0:
+      print("La matriz clave no es invertible")
+      clave = np.zeros((dimClave, dimClave))
+      for i in range(dimClave):
+          for j in range(dimClave):
+              clave[i][j] = int(input("Ingrese el valor de la posición " + str(i) + "," + str(j) + ": "))
 
-# Cifrar mensaje
+  # Initializar matriz de mensaje
 
-mensaje_cifrado = np.matmul(mensaje_matriz, clave)
+  if len(mensaje_numeros) % dimClave != 0:
+      espacios = dimClave - (len(mensaje_numeros) % dimClave)
+      for i in range(espacios):
+          mensaje_numeros = np.append(mensaje_numeros, 27)
 
-# Imprimir mensaje cifrado y guardar en archivo txt
+  mensaje_matriz = mensaje_numeros.reshape(int(len(mensaje_numeros) / dimClave), dimClave)
 
-print("Mensaje cifrado: ", mensaje_cifrado.reshape(-1))
+  # Cifrar mensaje
 
-txt = ['''Mensaje: {mensaje} \n
-Matriz clave:
-{clave} \n
-Mensaje cifrado: 
-{mensaje_cifrado}'''.format(mensaje=mensaje, clave=clave, mensaje_cifrado=mensaje_cifrado.reshape(-1))]
+  mensaje_cifrado = np.matmul(mensaje_matriz, clave)
 
-np.savetxt('resultados.txt', txt, fmt='%s')
+  # Imprimir mensaje cifrado y guardar en archivo txt
+
+  print("Mensaje cifrado: ", mensaje_cifrado.reshape(-1))
+
+  cifrado_txt = ['''Mensaje: {mensaje} \n
+  Matriz clave:
+  {clave} \n
+  Mensaje cifrado: 
+  {mensaje_cifrado}'''.format(mensaje=mensaje, clave=clave, mensaje_cifrado=mensaje_cifrado.reshape(-1))]
+
+  np.savetxt('cifrado.txt', cifrado_txt, fmt='%s')
+
+# Funcion de descifrado
+
+def descifrar(mensaje, clave):
+
+  # Leer mensaje cifrado
+
+  mensaje = input("Ingrese el mensaje a descifrar: ")
+
+  # Convertir mensaje a lista de numeros
+
+  mensaje_numeros = np.array([])
+
+  for letra in range(len(mensaje)):
+    if ord(mensaje[letra]) == 32:
+      mensaje_numeros = np.append(mensaje_numeros, 27)
+    else:
+      mensaje_numeros = np.append(mensaje_numeros, (ord(mensaje[letra]) - 64))
+
+  # Inicializar matriz de clave
+
+  dimClave = int(input("Ingrese la dimensión de la clave: "))
+  clave = np.zeros((dimClave, dimClave))
+
+  # Ingresar valores de la matriz de clave
+
+  for i in range(dimClave):
+      for j in range(dimClave):
+          clave[i][j] = int(input("Ingrese el valor de la posición " + str(i) + "," + str(j) + ": "))
+
+  # Validar si la matriz clave es invertible
+
+  while np.linalg.det(clave) == 0:
+      print("La matriz clave no es invertible")
+      clave = np.zeros((dimClave, dimClave))
+      for i in range(dimClave):
+          for j in range(dimClave):
+              clave[i][j] = int(input("Ingrese el valor de la posición " + str(i) + "," + str(j) + ": "))
+
+  # Initializar matriz de mensaje
+
+  if len(mensaje_numeros) % dimClave != 0:
+      espacios = dimClave - (len(mensaje_numeros) % dimClave)
+      for i in range(espacios):
+          mensaje_numeros = np.append(mensaje_numeros, 27)
+
+  mensaje_matriz = mensaje_numeros.reshape(int(len(mensaje_numeros) / dimClave), dimClave)
+
+  # Descifrar mensaje
+
+  mensaje_descifrado = np.matmul(mensaje_matriz, np.linalg.inv(clave))
+
+  # Imprimir mensaje descifrado y guardar en archivo txt
+
+  print("Mensaje descifrado: ", mensaje_descifrado.reshape(-1))
+
+  descifrado_txt = ['''Mensaje: {mensaje} \n
+  Matriz clave:
+  {clave} \n
+  Mensaje descifrado: 
+  {mensaje_descifrado}'''.format(mensaje=mensaje, clave=clave, mensaje_descifrado=mensaje_descifrado.reshape(-1))]
+
+  np.savetxt('descifrado.txt', descifrado_txt, fmt='%s')
