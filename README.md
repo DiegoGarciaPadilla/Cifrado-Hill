@@ -11,11 +11,12 @@ Algoritmo que permite al usuario codificar y decodificar mensajes mediante el ci
 Supongamos que se tiene una matriz invertible $A$ (matriz de codificación) y un texto que se quiere cifrar.
 
 Transformamos el texto a una secuencia de números, dando a cada carácter un valor numérico único; a continuación, formamos una matriz mediante la agrupación de los números en columnas de acuerdo al orden de la matriz A (la cantidad de elementos en cada columna debe ser igual al orden de la matriz). Llamemos a esta matriz B (la matriz plana). Multipliquemos la matriz A por la matriz B:
+
 $$C = A \cdot B$$
 
-La matriz C es la matriz cifrada.
+La matriz $C$ es la matriz cifrada.
 
-Para descifrar el mensaje, sólo debe multiplicarse $A^{-1} \cdot C$, donde $A^{-1}$ es la matriz inversa de A.
+Para descifrar el mensaje, sólo debe multiplicarse $A^{-1} \cdot C$, donde $A^{-1}$ es la matriz inversa de $A$.
 
 Nótese que:
 
