@@ -9,9 +9,23 @@ abecedario = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L",
 
 # Funciones
 
+# Función de impresión
+
+def imprimir(matriz):
+  matriz_plana = str(matriz.reshape(-1)).split("[")[1].split("]")[0].split(".")
+  matriz_plana = [i.removeprefix('\n').removeprefix(' ') for i in matriz_plana]
+  mensaje = ""
+  for char in matriz_plana:
+    if char != '': mensaje += char + ", "
+  return mensaje
+
 # Funcion de cifrado
 
 def cifrar(mensaje, clave):
+
+  # Ingrese destinatario
+
+  destinatario = input("Ingrese el destinatario: ")
 
   # Leer mensaje
 
@@ -40,7 +54,7 @@ def cifrar(mensaje, clave):
 
   for i in range(dimClave):
     for j in range(dimClave):
-      clave[i][j] = int(input("Ingrese el valor de la posición " + str(i) + "," + str(j) + ": "))
+      clave[i][j] = int(input("Ingrese el valor de la posición " + str(i+1) + "," + str(j+1) + ": "))
 
   # Validar si la matriz clave es invertible
 
@@ -49,7 +63,7 @@ def cifrar(mensaje, clave):
     clave = np.zeros((dimClave, dimClave))
     for i in range(dimClave):
       for j in range(dimClave):
-        clave[i][j] = int(input("Ingrese el valor de la posición " + str(i) + "," + str(j) + ": "))
+        clave[i][j] = int(input("Ingrese el valor de la posición " + str(i+1) + "," + str(j+1) + ": "))
 
   # Initializar matriz de mensaje
 
@@ -66,15 +80,11 @@ def cifrar(mensaje, clave):
 
   # Imprimir mensaje cifrado y guardar en archivo txt
 
-  print("Mensaje cifrado: ", mensaje_cifrado.reshape(-1))
-
-  cifrado_txt = ['''Mensaje: {mensaje} \n
-  Matriz clave:
-  {clave} \n
-  Mensaje cifrado: 
-  {mensaje_cifrado}'''.format(mensaje=mensaje, clave=clave, mensaje_cifrado=mensaje_cifrado.reshape(-1))]
+  cifrado_txt = ['Querido/a: {destinatario} \n\nEl mensaje cifrado es: {mensaje}'.format(destinatario=destinatario, mensaje=imprimir(mensaje_cifrado))]
 
   np.savetxt('cifrado.txt', cifrado_txt, fmt='%s')
+
+  print("El mensaje cifrado se ha guardado en el archivo cifrado.txt")
 
 # Funcion de descifrado
 
@@ -101,7 +111,7 @@ def descifrar(mensaje, clave):
 
   for i in range(dimClave):
     for j in range(dimClave):
-      clave[i][j] = int(input("Ingrese el valor de la posición " + str(i) + "," + str(j) + " para la matriz clave: "))
+      clave[i][j] = int(input("Ingrese el valor de la posición " + str(i+1) + "," + str(j+1) + " para la matriz clave: "))
 
   # Validar si la matriz clave es invertible
 
@@ -110,7 +120,7 @@ def descifrar(mensaje, clave):
     clave = np.zeros((dimClave, dimClave))
     for i in range(dimClave):
       for j in range(dimClave):
-        clave[i][j] = int(input("Ingrese el valor de la posición " + str(i) + "," + str(j) + ": "))
+        clave[i][j] = int(input("Ingrese el valor de la posición " + str(i+1) + "," + str(j+1) + ": "))
 
   # Inicializar matriz de mensaje
 
@@ -131,17 +141,13 @@ def descifrar(mensaje, clave):
   for i in range(len(mensaje_descifrado)):
     mensaje_descifrado_string += abecedario[int(mensaje_descifrado[i]) - 1]
 
-  # Imprimir mensaje descifrado y guardar en archivo txt
+  # Guardar mensaje descifrado en archivo txt
 
-  print("Mensaje descifrado: ", mensaje_descifrado_string)
-
-  descifrado_txt = ['''Mensaje cifrado: {mensaje} \n
-  Matriz clave:
-  {clave} \n
-  Mensaje descifrado: 
-  {mensaje_descifrado_string}'''.format(mensaje=mensaje, clave=clave, mensaje_descifrado_string=mensaje_descifrado_string)]
+  descifrado_txt = ['El mensaje descifrado es: {mensaje}'.format(mensaje=mensaje_descifrado_string)]
 
   np.savetxt('descifrado.txt', descifrado_txt, fmt='%s')
+
+  print("El mensaje descifrado se ha guardado en el archivo descifrado.txt")
 
 # Funcion principal
 
@@ -150,26 +156,10 @@ def main():
   # Mensaje de bienvenida
 
   bienvenida = '''
-              ,---------------------------,
-              |  /---------------------\  |
-              | |                       | |
-              | |                       | |
-              | |      Encriptar        | |
-              | |       mensaje         | |
-              | |                       | |
-              |  \_____________________/  |
-              |___________________________|
-            ,---\_____     []     _______/------,
-          /         /______________\           /|
-        /___________________________________ /  | ___
-        |                                   |   |    )
-        |  _ _ _                 [-------]  |   |   (
-        |  o o o                 [-------]  |  /    _)_
-        |__________________________________ |/     /  /
-    /-------------------------------------/|      ( )/
-  /-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/ /
-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/ /
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~'''
+  
+█▀▀ █▀█ █▀▄ █ █▀▀ █▀█   █▀▀ █▄░█ █ █▀▀ █▀▄▀█ ▄▀█
+█▄▄ █▄█ █▄▀ █ █▄█ █▄█   ██▄ █░▀█ █ █▄█ █░▀░█ █▀█
+'''
 
   print(bienvenida)
 

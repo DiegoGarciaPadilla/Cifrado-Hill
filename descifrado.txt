@@ -1,8 +1,1 @@
-Mensaje cifrado: [53. 76. 15. 28.] 
-
-  Matriz clave:
-  [[1. 2.]
- [3. 4.]] 
-
-  Mensaje descifrado: 
-  HOLA
+El mensaje descifrado es: EL TESORO ESTA BAJO EL PUENTE 

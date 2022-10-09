@@ -1,8 +1,2 @@
-Mensaje: HOLA 
-
-  Matriz clave:
-  [[1. 2.]
- [3. 4.]] 
-
-  Mensaje cifrado: 
-  [53. 76. 15. 28.]
+Querido/a: Isabel 
+El mensaje cifrado es: 41,  58,  87, 134,  62,  86,  69, 102,  96, 138,  62,  86,  23,  44,  33,  62,  31,  42,  96, 138,  41,  58,  75, 118,  36,  62,  74, 108,  86, 118, 
