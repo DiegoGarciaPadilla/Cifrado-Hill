@@ -2,6 +2,8 @@
 
 _Proyecto para el módulo de Pensamiento Computacional Para Ingeniería_
 
+[Archivo de correcciones](Correcciones.md)
+
 ## Descripción.
 
 Algoritmo que permite al usuario codificar y decodificar mensajes mediante el cifrado de Hill, para después imprimir los resultados en consola y, además, guardarlos en un archivo tipo txt.
@@ -23,3 +25,7 @@ Nótese que:
 $$A^{-1} \cdot C = A^{-1} \cdot A\cdot B = I \cdot B = B$$
 
 El texto plano original se puede hallar nuevamente tomando la matriz resultante y uniendo sus vectores columna, de manera que formen una secuencia, para luego convertir los números en los caracteres respectivos.
+
+## Instrucciones para su ejecución
+
+El programa hace uso de la librería `numpy`, la cual está instalada en un entorno virtual de Python. Para poder acceder a ella se deberá activar el entorno virtual con el siguiente comando: `Proyecto_TC1028\Scripts\activate`.
