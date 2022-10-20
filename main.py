@@ -9,6 +9,20 @@ abecedario = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L",
 
 # Funciones
 
+# Función para comprobar si la matriz es invertible
+
+def es_invertible(matriz):
+  return np.linalg.det(matriz) != 0
+
+# Función para llenar matriz
+
+def llenar_matriz(dim):
+  matriz = np.zeros((dim, dim))
+  for i in range(dim):
+    for j in range(dim):
+      matriz[i][j] = int(input("Ingrese el valor de la posición " + str(i+1) + "," + str(j+1) + ": "))
+  return matriz
+
 # Función de impresión
 
 def imprimir(matriz):
@@ -58,12 +72,9 @@ def cifrar(mensaje, clave):
 
   # Validar si la matriz clave es invertible
 
-  while np.linalg.det(clave) == 0:
+  while not es_invertible(clave):
     print("La matriz clave no es invertible")
-    clave = np.zeros((dimClave, dimClave))
-    for i in range(dimClave):
-      for j in range(dimClave):
-        clave[i][j] = int(input("Ingrese el valor de la posición " + str(i+1) + "," + str(j+1) + ": "))
+    clave = llenar_matriz(dimClave)
 
   # Initializar matriz de mensaje
 
@@ -96,7 +107,7 @@ def descifrar(mensaje, clave):
 
   for i in range(dimMensaje):
     mensaje = np.append(mensaje, int(
-    input("Ingrese el valor de la posición " + str(i) + " para el mensaje: ")))
+    input("Ingrese el valor de la posición " + str(i+1) + " para el mensaje: ")))
 
   # Inicializar matriz de clave
 
@@ -115,12 +126,9 @@ def descifrar(mensaje, clave):
 
   # Validar si la matriz clave es invertible
 
-  while np.linalg.det(clave) == 0:
+  while not es_invertible(clave):
     print("La matriz clave no es invertible")
-    clave = np.zeros((dimClave, dimClave))
-    for i in range(dimClave):
-      for j in range(dimClave):
-        clave[i][j] = int(input("Ingrese el valor de la posición " + str(i+1) + "," + str(j+1) + ": "))
+    clave = llenar_matriz(dimClave)
 
   # Inicializar matriz de mensaje
 
@@ -187,4 +195,9 @@ def main():
 
 # Llamar a la funcion principal
 
-main()
+repetir = True
+while repetir:
+  main()
+  repetir = int(input("Ingrese 1 para repetir el programa o 0 para salir: "))
+
+
