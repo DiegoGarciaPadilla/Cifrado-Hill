@@ -1,3 +1,28 @@
+'''
+Autor: Diego Antonio García Padilla
+
+El siguiente algoritmo permite al usuario ingresar un mensaje y una clave
+para cifrar el mensaje, y luego ingresar el mensaje cifrado y la clave para
+descifrar el mensaje.
+
+Se asume que el mensaje a cifrar es una cadena de caracteres alfabéticos
+mayúsculas y espacios, y que la clave es una matriz cuadrada invertible.
+
+El algortmo usa la librería numpy para realizar las operaciones matriciales
+necesarias para cifrar y descifrar el mensaje.
+
+Algunas funciones de la librería numpy utilizadas son:
+    - np.zeros((dim, dim)): crea una matriz de dim x dim con todos sus
+    elementos iguales a 0.
+    - np.array([]): crea un arreglo vacío.
+    - np.append(arreglo, elemento): agrega un elemento al final del arreglo.
+    - np.matmul(matriz1, matriz2): multiplica dos matrices.
+    - np.linalg.det(matriz): calcula el determinante de una matriz.
+    - np.linalg.inv(matriz): calcula la inversa de una matriz.
+    - np.reshape(filas, columnas): redimensiona una matriz a filas x columnas.
+
+'''
+
 # Importar librerías
 
 import numpy as np
