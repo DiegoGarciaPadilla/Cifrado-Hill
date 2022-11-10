@@ -48,7 +48,7 @@ def llenar_matriz(dim):
     for i in range(dim):
         for j in range(dim):
             matriz[i][j] = int(
-                inp ut("Ingrese el valor de la posición " + str(i+1) + "," + str(j+1) + ": "))
+                input("Ingrese el valor de la posición " + str(i+1) + "," + str(j+1) + ": "))
     return matriz
 
 # Función de impresión
